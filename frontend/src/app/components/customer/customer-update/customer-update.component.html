@@ -1,0 +1,22 @@
+<mat-card-content>
+    <mat-card-title>Alterar Produto</mat-card-title>
+    <form>
+        <mat-form-field>
+            <mat-label>Nome</mat-label>
+            <input matInput
+                [(ngModel)]="customer.nome" name="nome" required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>E-mail</mat-label>
+            <input matInput
+                [(ngModel)]="customer.email" name="email" required>
+        </mat-form-field>
+    </form>
+    <button mat-flat-button (click)="updateCustomer()" color="primary">
+        Atualizar
+    </button>
+    
+    <button mat-flat-button (click)="cancel()">
+        Cancelar
+    </button>
+</mat-card-content>

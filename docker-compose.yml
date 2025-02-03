@@ -1,0 +1,69 @@
+version: '4.37.1'
+
+services:
+  api0:
+    build:
+      context: ./backend/api-gateway
+    container_name: gateway
+    ports:
+      - "8080:8080" 
+    depends_on:
+      - api1
+      - api2
+    networks:
+      - app-network
+
+  api1:
+    build:
+      context: ./backend/products
+    container_name: produtos
+    ports:
+      - "8081:8081" # API 1 exposta na porta 8081
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/algafood
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=123456
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+  api2:
+    build:
+      context: ./backend/customers
+    container_name: clientes
+    ports:
+      - "8082:8082" # API 2 exposta na porta 8082
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/algafood
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=123456
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=algafood
+    networks:
+      - app-network
+
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: angular
+    ports:
+      - 4200:80
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

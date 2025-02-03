@@ -1,0 +1,4 @@
+/products/update/1
+/products/update/555
+/customers/1
+/customers/555

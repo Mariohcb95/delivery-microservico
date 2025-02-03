@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        # Rota para o user-service
+        - id: produtos
+          uri: http://produtos:8081
+          predicates:
+            - Path=/produtos/**
+
+        # Rota para o product-service
+        - id: usuarios
+          uri: http://clientes:8082
+          predicates:
+            - Path=/usuarios/**
+  web:
+    cors:
+      allowed-origins: "*"
+      allowed-methods: "*"
+
+server:
+  port: 8080  # Porta do Gateway

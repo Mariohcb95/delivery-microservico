@@ -1,0 +1,34 @@
+<mat-card-content>
+    <mat-card-title>Alterar Cliente</mat-card-title>
+    <form>
+        <mat-form-field>
+            <mat-label>Nome</mat-label>
+            <input matInput 
+                [(ngModel)]="product.nome" name="nome" required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Descrição</mat-label>
+            <input matInput
+                [(ngModel)]="product.descricao" name="descricao" required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Preço (R$)</mat-label>
+            <input matInput step="0.01"
+                [(ngModel)]="product.preco" name="preco" required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Status</mat-label>
+            <mat-select [(value)]="selectedOption" name="status" required>
+                    <mat-option [value]="true">Ativo</mat-option>
+                    <mat-option [value]="false">Inativo</mat-option>
+              </mat-select>
+        </mat-form-field>
+    </form>
+    <button mat-flat-button (click)="updateProduct()" color="primary">
+        Atualizar
+    </button>
+    
+    <button mat-flat-button (click)="cancel()">
+        Cancelar
+    </button>
+</mat-card-content>
